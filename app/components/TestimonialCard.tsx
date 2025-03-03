@@ -43,44 +43,46 @@ const TestimonialCard = () => {
   };
 
   return (
-    <section className="py-6 md:py-12 flex flex-col lg:flex-row items-center lg:items-end px-4 max-w-7xl mx-auto lg:pb-20">
-      <div className="text-center lg:text-left mb-6 md:mb-8 space-y-2 w-full lg:w-auto">
+    <section className="py-6 md:py-12 flex flex-col lg:flex-row items-start lg:items-end px-6 max-w-7xl mx-auto lg:pb-20">
+      <div className="text-left mb-6 md:mb-8 space-y-2 w-full lg:w-auto">
         <p className="text-yellow-600 font-semibold text-sm md:text-base">
           TESTIMONIAL
         </p>
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 px-4 lg:px-0">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900  lg:px-0">
           SUCCESS STORY FROM OUR ACADEMY TRAINING
         </h2>
         <div className="flex gap-4 md:gap-8 justify-center lg:justify-start hidden lg:block space-x-10">
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="p-2 bg-[#F0AD12] text-[#095424] rounded-full shadow-md hover:bg-[#fede94]"
+            className="py-1 px-2 bg-[#F0AD12] text-[#095424] rounded-full shadow-md hover:bg-[#fede94]"
           >
             ←
           </button>
           <button
             onClick={nextSlide}
-            className="p-2 bg-[#F0AD12] text-[#095424] rounded-full shadow-md hover:bg-[#fede94]"
+            className="py-1 px-2 bg-[#F0AD12] text-[#095424] rounded-full shadow-md hover:bg-[#020202]"
           >
             →
           </button>
         </div>
       </div>
 
-      <div className="relative flex items-center justify-center w-full lg:w-2/3">
+      <div className="relative flex items-center justify-center w-full ">
         {/* Testimonial Cards */}
         <div className="w-full flex overflow-hidden">
           {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className={`w-full p-2 md:p-4 transition-opacity duration-500 ${
-                index === currentIndex ? "opacity-100" : "opacity-0 hidden"
+              className={`w-full md:p-4 transition-opacity duration-500 ${
+                index === currentIndex ? "opacity-100 lg:opacity-100" : "opacity-0 hidden lg:block lg:opacity-100"
+              } ${
+                index === 1 ? "lg:ml-4" : ""
               }`}
             >
-              <div className="bg-white shadow-lg rounded-lg p-4 md:p-6">
+              <div className="bg-[#F4F6F4] rounded-2xl p-4 md:p-4">
                 <div className="flex flex-col items-start mb-4">
-                  <div className="flex items-center justify-between w-full py-4 md:py-10 px-2 md:pl-6">
+                  <div className="flex items-center justify-between w-full py-2 px-2 md:pl-6">
                     <img src="/images/flowerv.svg" className="w-8 md:w-auto" />
                     <Image
                       src={testimonial.image}
@@ -111,17 +113,17 @@ const TestimonialCard = () => {
           ))}
         </div>
       </div>
-      <div className="flex gap-4 md:gap-8 justify-center mt-4 lg:hidden space-x-10">
+      <div className="flex gap-4 md:gap-8 justify-center items-start mt-4 lg:hidden space-x-10">
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="p-2 bg-[#F0AD12] text-[#095424] rounded-full shadow-md hover:bg-[#fede94]"
+          className="py-1 px-2 bg-[#F0AD12] text-[#095424] rounded-full shadow-md hover:bg-[#fede94]"
         >
           ←
         </button>
         <button
           onClick={nextSlide}
-          className="p-2 bg-[#F0AD12] text-[#095424] rounded-full shadow-md hover:bg-[#fede94]"
+          className="py-1 px-2 bg-[#F0AD12] text-[#095424] rounded-full shadow-md hover:bg-[#fede94]"
         >
           →
         </button>

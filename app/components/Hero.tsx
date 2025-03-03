@@ -87,43 +87,46 @@ export default function Hero() {
       ></div>
 
       {/* Content Container */}
-      <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-6 lg:px-8  lg:pt-[14rem]">
+      <div className="absolute inset-0 flex  flex-col justify-center px-6 sm:px-6 lg:px-8  lg:pt-[14rem]">
         {/* Text Content */}
-        <div className="w-full lg:w-1/2 lg:pl-20 text-white">
-          <div className="text-start">
-            <p className="text-[#F0AD12] text-lg sm:text-xl lg:text-2xl">
+        <div className="w-full  lg:px-10 text-white">
+          <div className="text-start space-y-[12px]">
+            <p className="text-[#F0AD12] text-[16px] sm:text-xl lg:text-2xl">
               UPCOMING EVENT
             </p>
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold mb-2 sm:mb-4">
+            <h1 className="text-[24px] uppercase sm:text-2xl md:text-3xl lg:text-5xl font-bold mb-2 sm:mb-4">
               {slides[currentIndex].title}
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-2xl mb-4 sm:mb-6">
+            <p className="text-[16px] sm:text-base md:text-lg lg:text-2xl mb-4 sm:mb-6">
               {slides[currentIndex].description}
             </p>
             {slides[currentIndex].showTimer && (
               <div className="rounded-lg mb-4">
-                <div className="text-base sm:text-lg lg:text-[32px] flex font-medium items-center gap-2 sm:gap-4">
+                <div className="text-[20px] sm:text-lg lg:text-[32px] flex font-medium items-center gap-2 sm:gap-4">
                   <span className="flex flex-col items-center justify-center">
-                    {timeLeft.days} <p className="text-xs sm:text-sm">days</p>
+                    {timeLeft.days} <p className="text-[14px] sm:text-sm">days</p>
                   </span>
                   :
                   <span className="flex flex-col items-center justify-center">
-                    {timeLeft.hours} <p className="text-xs sm:text-sm">hours</p>
+                    {timeLeft.hours} <p className="text-[14px] sm:text-sm">hours</p>
                   </span>
                   :
                   <span className="flex flex-col items-center justify-center">
                     {timeLeft.minutes}{" "}
-                    <p className="text-xs sm:text-sm">minutes</p>
+                    <p className="text-[14px] sm:text-sm">minutes</p>
                   </span>
                   :
                   <span className="flex flex-col items-center justify-center">
                     {timeLeft.seconds}{" "}
-                    <p className="text-xs sm:text-sm">seconds</p>
+                    <p className="text-[14px] sm:text-sm">seconds</p>
                   </span>
                 </div>
               </div>
             )}
-            <button className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-4 bg-[#095424] text-white hover:bg-[#5daa79] transition rounded-4xl flex items-center justify-center sm:justify-start">
+           
+          </div>
+          <div className="flex items-center justify-between "> 
+            <button className=" sm:w-auto px-4 sm:px-6 py-2 sm:py-4 bg-[#095424] text-white hover:bg-[#5daa79] transition rounded-4xl flex items-center justify-center sm:justify-start">
               <span className="text-sm sm:text-base">
                 {slides[currentIndex].buttonText}
               </span>
@@ -132,25 +135,28 @@ export default function Hero() {
                 size={16}
               />
             </button>
-          </div>
-        </div>
-
-        {/* Navigator */}
-        <div className="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 lg:right-20 flex space-x-4 sm:space-x-8 lg:bottom-30">
+            
+            {/* Navigator */}
+        <div className=" flex space-x-4 sm:space-x-8 ">
           <button
             onClick={goToPrev}
-            className="p-1 sm:p-2 border border-white text-white border-opacity-75 rounded-full hover:border-opacity-100 transition"
+            className="py-1 px-2  border border-white text-white border-opacity-75 rounded-full hover:border-opacity-100 transition"
           >
             &larr;
           </button>
           <button
             onClick={goToNext}
-            className="p-1 sm:p-2 border border-white text-white border-opacity-75 rounded-full hover:border-opacity-100 transition"
+            className="py-1 px-2   border border-white text-white border-opacity-75 rounded-full hover:border-opacity-100 transition"
           >
             &rarr;
           </button>
         </div>
+        </div>
+        </div>
+
+        
       </div>
+      
     </div>
   );
 }

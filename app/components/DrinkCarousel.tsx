@@ -54,7 +54,7 @@ export default function DrinkCarousel() {
   };
 
   return (
-    <div className="relative w-full  mx-auto p-6">
+    <div className="relative w-full  mx-auto p-6 ">
       <div className="relative flex items-center justify-between">
         <button onClick={prevSlide} className="p-2 bg-[#F0AD12] rounded-full">
           <ChevronLeft />
