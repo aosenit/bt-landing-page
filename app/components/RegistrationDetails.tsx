@@ -11,12 +11,12 @@ export default function RegistrationDetails() {
     gender: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e?.target?.name]: e?.target?.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (e: any) => {
+    e?.preventDefault();
     console.log("Form Submitted", formData);
   };
 

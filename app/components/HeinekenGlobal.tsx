@@ -24,10 +24,7 @@ export default function HeinekenGlobal() {
             event?
           </p>
           <div className="mt-6 md:mt-8">
-            <button
-              variant="outline"
-              className="w-full md:w-auto px-4 sm:px-6 py-5 sm:py-4 bg-[#095424] text-white hover:bg-[#5daa79] transition rounded-4xl flex items-center justify-center md:justify-start"
-            >
+            <button className="w-full md:w-auto px-4 sm:px-6 py-5 sm:py-4 bg-[#095424] text-white hover:bg-[#5daa79] transition rounded-4xl flex items-center justify-center md:justify-start">
               Register to Attend{" "}
               <ArrowUpRight
                 className="ml-2 bg-[#F0AD12] rounded-full text-[#095424]"

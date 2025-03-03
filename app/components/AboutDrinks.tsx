@@ -10,7 +10,9 @@ export default function AboutDrinks() {
     <section className="px-4 py-6 sm:px-6 md:px-10 lg:px-16">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between py-8 md:py-16">
         <div className="w-full md:w-[50%] space-y-4">
-          <h4 className="text-yellow-600 font-semibold text-[14px] uppercase">Recipes</h4>
+          <h4 className="text-yellow-600 font-semibold text-[14px] uppercase">
+            Recipes
+          </h4>
           <h2 className="text-xl sm:text-2xl lg:text-[40px] font-bold mt-2 uppercase">
             About Drinks
           </h2>
@@ -44,7 +46,10 @@ export default function AboutDrinks() {
           </div>
           <div className="w-full   p-2 rounded-lg flex flex-col  sm:items-end items-end ">
             <div className=" md:mt-0 md:ml-4 space-y-3 text-start sm:text-left">
-              <img src="/images/flowerv.svg" className="items-start sm:mx-0 w-[20%] lg:w-[40px]" />
+              <img
+                src="/images/flowerv.svg"
+                className="items-start sm:mx-0 w-[20%] lg:w-[40px]"
+              />
               <h3 className="text-[16px] sm:text-xl lg:text-3xl font-bold">
                 Bacardi
               </h3>
@@ -57,15 +62,14 @@ export default function AboutDrinks() {
               </p>
             </div>
             <div className=" md:mt-4 text-left items-end lg:items-end flex">
-            <button variant="outline">
-              <ArrowUpRight
-                className=" bg-[#F0AD12] rounded-full text-[#095424]"
-                size={20}
-              />
-            </button>
+              <button>
+                <ArrowUpRight
+                  className=" bg-[#F0AD12] rounded-full text-[#095424]"
+                  size={20}
+                />
+              </button>
+            </div>
           </div>
-          </div>
-          
         </div>
         <div className="mt-6 md:mt-8 block lg:hidden ">
           <Link

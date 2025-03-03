@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function EventRegistration() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
@@ -12,11 +13,11 @@ export default function EventRegistration() {
     dob: "Select your DOB",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e?.target?.name]: e?.target?.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     router.push("/registration-details");
   };
