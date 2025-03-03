@@ -6,7 +6,7 @@ import { ArrowUp } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="text-white bg-[#052B12] relative flex flex-col items-center ">
+    <footer className="text-white bg-[#052B12] relative flex flex-col items-center overflow-hidden">
       <div className="w-full h-auto min-h-[500px] flex flex-col md:flex-row justify-between items-center md:items-start pt-10 md:pt-20 px-4 md:px-16">
         <div className="w-full md:w-[30%] space-y-6 md:space-y-10 text-center md:text-left">
           <img src="/images/logo.svg" className="mx-auto md:mx-0" />

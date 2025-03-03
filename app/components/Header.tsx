@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ArrowUp, Menu } from "lucide-react"; // Import the Menu icon for the hamburger
+import Link from "next/link";
 
 export default function Header({ isHeroPage = false }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,12 +29,18 @@ export default function Header({ isHeroPage = false }) {
           isOpen ? "block" : "hidden"
         } md:flex md:space-x-6 md:items-center md:justify-center absolute md:static top-16 left-0 w-full md:w-auto bg-black md:bg-transparent p-4 md:p-0`}
       >
-        <button className="block w-full text-left md:text-center border border-white rounded-2xl p-2 hover:bg-green-100 hover:text-black mb-2 md:mb-0">
+        <Link
+          href={"/event"}
+          className="block w-full text-left md:text-center border border-white rounded-2xl p-2 hover:bg-green-100 hover:text-black mb-2 md:mb-0"
+        >
           Training
-        </button>
-        <button className="block w-[15rem] text-left md:text-center border border-white rounded-2xl p-2 hover:bg-green-100 hover:text-black ">
+        </Link>
+        <Link
+          href={"/event"}
+          className="block w-[15rem] text-left md:text-center border border-white rounded-2xl p-2 hover:bg-green-100 hover:text-black "
+        >
           Attend Event
-        </button>
+        </Link>
       </nav>
     </header>
   );

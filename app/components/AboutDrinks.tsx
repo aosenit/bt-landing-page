@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 export default function AboutDrinks() {
   return (
@@ -19,8 +20,8 @@ export default function AboutDrinks() {
           </p>
         </div>
         <div className="mt-6 md:mt-8">
-          <button
-            variant="outline"
+          <Link
+            href={"/recipe"}
             className="w-full md:w-auto px-4 sm:px-6 py-3 sm:py-4 bg-[#095424] text-white hover:bg-[#5daa79] transition rounded-4xl flex items-center justify-center md:justify-start"
           >
             See more recipes{" "}
@@ -28,7 +29,7 @@ export default function AboutDrinks() {
               className="ml-2 bg-[#F0AD12] rounded-full text-[#095424]"
               size={18}
             />
-          </button>
+          </Link>
         </div>
       </div>
 
