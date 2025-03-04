@@ -3,7 +3,7 @@ import EventRegistration from "../components/EventRegistration";
 
 const Page = () => {
   return (
-    <div>
+    <div className="">
       <EventRegistration />
     </div>
   );

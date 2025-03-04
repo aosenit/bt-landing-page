@@ -3,4 +3,17 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-neilvarde: var(--font-neilvarde);
+  --font-archivo: var(--font-archivo);
+}
+
+body {
+  @apply font-archivo;
+}
+
+h1,
+h2,
+h3
+ {
+  @apply font-neilvarde;
 }

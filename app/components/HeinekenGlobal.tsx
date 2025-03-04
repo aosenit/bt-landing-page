@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function HeinekenGlobal() {
+  const router = useRouter();
   return (
     <section className=" sm:px-6 py-6 sm:py-8 md:px-10 lg:px-16 flex flex-col space-y-12 sm:space-y-20 items-center">
       <img src="/images/logo2.svg" className="w-48 sm:w-auto" />
@@ -24,7 +26,7 @@ export default function HeinekenGlobal() {
             event?
           </p>
           <div className="mt-6 md:mt-8">
-            <button className="w-full md:w-auto px-4 sm:px-6 py-5 sm:py-4 bg-[#095424] text-white hover:bg-[#5daa79] transition rounded-4xl flex items-center justify-center md:justify-start">
+            <button className="w-full md:w-auto px-4 sm:px-6 py-5 sm:py-4 bg-[#095424] text-white hover:bg-[#5daa79] transition rounded-4xl flex items-center justify-center md:justify-start" onClick={() => router.push("/event")}>
               Register to Attend{" "}
               <ArrowUpRight
                 className="ml-2 bg-[#F0AD12] rounded-full text-[#095424]"

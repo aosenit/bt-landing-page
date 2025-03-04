@@ -2,6 +2,7 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const images = ["/images/hero1.svg", "/images/hero2.svg", "/images/hero3.svg"];
 
@@ -31,6 +32,7 @@ const slides = [
 
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const router = useRouter();
   const [timeLeft, setTimeLeft] = useState({
     days: 21,
     hours: 3,
@@ -126,7 +128,7 @@ export default function Hero() {
            
           </div>
           <div className="flex items-center justify-between "> 
-            <button className=" sm:w-auto px-4 sm:px-6 py-2 sm:py-4 bg-[#095424] text-white hover:bg-[#5daa79] transition rounded-4xl flex items-center justify-center sm:justify-start">
+            <button className=" sm:w-auto px-4 sm:px-6 py-2 sm:py-4 bg-[#095424] text-white hover:bg-[#5daa79] transition rounded-4xl flex items-center justify-center sm:justify-start" onClick={() => router.push("/event")}>
               <span className="text-sm sm:text-base">
                 {slides[currentIndex].buttonText}
               </span>

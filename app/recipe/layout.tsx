@@ -1,8 +1,16 @@
 import type React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-  return <div className="container mx-auto py-8 px-4">{children}</div>;
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header variant="dark" />
+      <main className="pt-[128px] min-h-screen bg-gray-100">{children}</main>
+      <Footer />
+    </div>
+  );
 }

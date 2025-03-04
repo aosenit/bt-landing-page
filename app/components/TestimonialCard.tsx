@@ -14,7 +14,7 @@ const testimonials = [
   {
     id: 2,
     image: "/images/profileimg.svg",
-    text: "I joined the Bar Training Masterclass with zero experience. In weeks, I mastered mixology, gained confidence, and became a pro",
+    text: "I became a mixologist in just 2 weeks. The course was intense, but I learned so much and gained confidence. I'm now a bar manager at a top hotel.",
     name: "Sarah J.",
     position: "Branch Manager",
   },

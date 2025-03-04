@@ -1,111 +1,123 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import EventRegisterationForm from "./EventRegisterationForm";
 
 export default function EventRegistration() {
   const router = useRouter();
+
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
     lastName: "",
     country: "Nigeria",
-    dob: "Select your DOB",
+    dateOfBirth: "",
+    organization: "",
+    position: "",
+    phoneNumber: "",
+    gender: ""
   });
 
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e?.target?.name]: e?.target?.value });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 21,
+    hours: 3,
+    minutes: 59,
+    seconds: 48
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev.seconds > 0) {
+          return { ...prev, seconds: prev.seconds - 1 };
+        } else if (prev.minutes > 0) {
+          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+        } else if (prev.hours > 0) {
+          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
+        } else if (prev.days > 0) {
+          return {
+            ...prev,
+            days: prev.days - 1,
+            hours: 23,
+            minutes: 59,
+            seconds: 59
+          };
+        }
+        clearInterval(timer);
+        return prev;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []); 
+  
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleProceed = (e: React.FormEvent) => {
     e.preventDefault();
+    setStep(2);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
     router.push("/registration-details");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-6 bg-gray-100">
-      <div className="w-full max-w-7xl px-4 md:px-8 lg:px-[10rem] flex flex-col lg:flex-row items-start justify-start gap-6 lg:gap-10">
-        <div className="w-full lg:w-1/2">
-          <h2 className="text-yellow-500 font-semibold text-sm md:text-base lg:text-[20px]">
+    <div className="w-full  max-w-7xl mx-auto p-6 md:px-8 py-12">
+      <div className="flex flex-col lg:flex-row gap-8 md:items-start">
+        <div className="w-full lg:w-1/2 flex flex-col justify-center md:mt-16">
+          <h4 className="text-yellow-500 font-semibold text-xl ">
             UPCOMING EVENT
-          </h2>
-          <h1 className="text-xl md:text-2xl lg:text-[40px] font-bold">
+          </h4>
+          <h1 className="text-3xl md:text-4xl mt-2">
             REGISTER FOR EVENT
           </h1>
-          <p className="text-gray-600 my-2 text-xs md:text-sm lg:text-[20px] pt-4">
+          <p className=" mt-4 text-sm md:text-[18px] w-lg leading-8 tracking-wide ">
             Register for our upcoming Bar Training Masterclass to take your
             bartending skills to the next level.
           </p>
           <div className="text-lg md:text-2xl font-bold flex space-x-2 my-4">
             <div className="flex flex-col items-center">
-              <span>21</span>
+              <span>{timeLeft.days}</span>
               <span className="text-xs md:text-[16px]">Days</span>
             </div>
             <span>:</span>
             <div className="flex flex-col items-center">
-              <span>03</span>
+              <span>{timeLeft.hours}</span>
               <span className="text-xs md:text-[16px]">Hours</span>
             </div>
             <span>:</span>
             <div className="flex flex-col items-center">
-              <span>59</span>
+              <span>{timeLeft.minutes}</span>
               <span className="text-xs md:text-[16px]">Minutes</span>
             </div>
             <span>:</span>
             <div className="flex flex-col items-center">
-              <span>48</span>
+              <span>{timeLeft.seconds}</span>
               <span className="text-xs md:text-[16px]">Seconds</span>
             </div>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="w-full lg:w-1/2 space-y-4">
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email address"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-md text-sm md:text-base"
-            required
+        {/* Right Section */}
+        <div className="w-full lg:w-1/2">
+          <EventRegisterationForm
+            step={step}
+            formData={formData}
+            handleChange={handleChange}
+            handleProceed={handleProceed}
+            handleSubmit={handleSubmit}
           />
-          <input
-            type="text"
-            name="firstName"
-            placeholder="Enter your first name"
-            value={formData.firstName}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-md text-sm md:text-base"
-            required
-          />
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Enter your last name"
-            value={formData.lastName}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-md text-sm md:text-base"
-            required
-          />
-          <div className="w-full p-3 border rounded-md bg-gray-100 text-sm md:text-base">
-            {formData.country}
-          </div>
-          <input
-            type="date"
-            name="dob"
-            value={formData.dob}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-md text-sm md:text-base"
-            required
-          />
-
-          <button
-            type="submit"
-            className="w-full bg-green-700 text-white py-3 rounded-md font-semibold text-sm md:text-base"
-          >
-            Proceed
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );
