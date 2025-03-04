@@ -52,7 +52,7 @@ export default function EventRegistration() {
 
     return () => clearInterval(timer);
   }, []); 
-  
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -72,7 +72,7 @@ export default function EventRegistration() {
   };
 
   return (
-    <div className="w-full  max-w-7xl mx-auto p-6 md:px-8 py-12">
+    <div className="w-full  max-w-6xl mx-auto p-6 md:px-8 py-12">
       <div className="flex flex-col lg:flex-row gap-8 md:items-start">
         <div className="w-full lg:w-1/2 flex flex-col justify-center md:mt-16">
           <h4 className="text-yellow-500 font-semibold text-xl ">
