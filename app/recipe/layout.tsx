@@ -9,7 +9,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
       <Header variant="dark" />
-      <main className="pt-[128px] min-h-screen bg-gray-100">{children}</main>
+      <main className="pt-[128px] min-h-screen bg-gray-300/10">{children}</main>
       <Footer />
     </div>
   );

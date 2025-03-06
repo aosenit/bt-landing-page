@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 
 const drinks = [
   {
@@ -43,203 +44,175 @@ const drinks = [
 ];
 
 export default function DrinkCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(1); 
-  const [isAnimating, setIsAnimating] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
 
-  // Setup initial scroll position
-  useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft = carouselRef.current.offsetWidth;
-    }
-  }, []);
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0
+    })
+  };
 
-  // Auto-slide functionality
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (!isAnimating) {
-        handleSlide('next');
+  const handleSlide = (newDirection: number) => {
+    setDirection(newDirection);
+    setCurrentIndex((prev) => {
+      if (newDirection === 1) {
+        return prev === drinks.length - 1 ? 0 : prev + 1;
       }
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [isAnimating]);
-
-  const handleSlide = (direction: 'prev' | 'next') => {
-    if (isAnimating || !carouselRef.current) return;
-
-    setIsAnimating(true);
-    const container = carouselRef.current;
-    const slideWidth = container.offsetWidth;
-    const currentScroll = container.scrollLeft;
-    const targetScroll = direction === 'next' 
-      ? currentScroll + slideWidth 
-      : currentScroll - slideWidth;
-
-    container.scrollTo({
-      left: targetScroll,
-      behavior: 'smooth'
+      return prev === 0 ? drinks.length - 1 : prev - 1;
     });
-
-    // Handle infinite scroll
-    setTimeout(() => {
-      setCurrentIndex(prev => {
-        let newIndex;
-        if (direction === 'next') {
-          newIndex = prev === drinks.length ? 1 : prev + 1;
-        } else {
-          newIndex = prev === 1 ? drinks.length : prev - 1;
-        }
-
-        // If we're at the cloned slides, jump to the real slides without animation
-        if (newIndex === 1 && direction === 'next') {
-          container.style.scrollBehavior = 'auto';
-          container.scrollLeft = slideWidth;
-          container.style.scrollBehavior = 'smooth';
-        } else if (newIndex === drinks.length && direction === 'prev') {
-          container.style.scrollBehavior = 'auto';
-          container.scrollLeft = slideWidth * drinks.length;
-          container.style.scrollBehavior = 'smooth';
-        }
-
-        return newIndex;
-      });
-      setIsAnimating(false);
-    }, 500);
   };
-
-  const handleDotClick = (index: number) => {
-    if (isAnimating || !carouselRef.current) return;
-    
-    setIsAnimating(true);
-    const container = carouselRef.current;
-    const slideWidth = container.offsetWidth;
-    const targetScroll = slideWidth * (index + 1); // +1 for the cloned slide
-
-    container.scrollTo({
-      left: targetScroll,
-      behavior: 'smooth'
-    });
-
-    setTimeout(() => {
-      setCurrentIndex(index + 1);
-      setIsAnimating(false);
-    }, 500);
-  };
-
-  // Create array with cloned items for infinite scroll
-  const extendedDrinks = [
-    drinks[drinks.length - 1], // Clone last item
-    ...drinks,
-    drinks[0] // Clone first item
-  ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-12">
+    <div className="w-full max-w-8xl mx-auto px-4 md:px-8 py-12">
       <div className="relative">
-        {/* Previous Button */}
         <button 
-          onClick={() => handleSlide('prev')} 
+          onClick={() => handleSlide(-1)} 
           className="absolute left-0 lg:top-1/2 top-[20%] lg:-translate-y-1/2 z-10 p-2 bg-[#F0AD12] rounded-full hover:bg-[#d89a10] transition-colors"
           aria-label="Previous slide"
-          disabled={isAnimating}
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ArrowLeft className="w-6 h-6 text-[#095424] " strokeWidth={1.5} />
         </button>
 
-        {/* Carousel Container */}
-        <div 
-          ref={carouselRef}
-          className="overflow-hidden"
-        >
-          <div className="flex">
-            {extendedDrinks.map((drink, index) => (
-              <div 
-                key={index}
-                className="w-full flex-shrink-0 px-8 md:px-16 lg:px-20"
-              >
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
-                  {/* Image Section */}
-                  <div className="w-full lg:w-1/2 flex justify-center relative">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gray-300/30 rounded-full" />
-                    <div className="">
-                      <img
-                        src={drink.image}
-                        alt={drink.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
+        <div className="overflow-hidden">
+          <AnimatePresence initial={false} custom={direction} mode="wait">
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                duration: 0.5,
+                ease: "easeInOut"
+              }}
+              className="w-full"
+            >
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16 px-8 md:px-16 lg:px-20">
+                {/* Image Section - Fixed height container */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full lg:w-[480px] h-[400px] lg:h-[600px] flex justify-center relative"
+                >
+                  <img
+                    src={drinks[currentIndex].image}
+                    alt={drinks[currentIndex].name}
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
 
-                  {/* Content Section */}
-                  <div className="w-full lg:w-1/2 space-y-4">
-                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
-                      {drink.name}
-                    </h2>
-                    <p className="text-gray-600 text-lg">
-                      {drink.type}
+                {/* Content Section */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full lg:w-1/2 space-y-4"
+                >
+                  <motion.h2 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-2xl md:text-4xl lg:text-5xl tracking-wider"
+                  >
+                    {drinks[currentIndex].name}
+                  </motion.h2>
+                  <div className="mt-8 md:mt-12"/>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="space-y-6"
+                  >
+                   <div className="space-y-3">
+                   <p className="text-gray-600 text-lg">
+                      {drinks[currentIndex].type}
                     </p>
                     <p className="text-gray-700 text-base md:text-lg">
-                      {drink.description}
+                      {drinks[currentIndex].description}
                     </p>
+                   </div>
                     
-                    <div className="space-y-6">
-                      <div>
-                        <h3 className="font-semibold text-[#F0AD12] text-xl mb-2">
-                          Ingredients:
-                        </h3>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                      >
+                        <p className="font-semibold text-[#F0AD12] text-xl mb-2">
+                          Ingredients
+                        </p>
                         <ul className="text-gray-600 space-y-1">
-                          {drink.ingredients.map((ingredient, i) => (
-                            <li key={i} className="text-base md:text-lg">
+                          {drinks[currentIndex].ingredients.map((ingredient, i) => (
+                            <motion.li 
+                              key={i}
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5, delay: 0.3 + (i * 0.1) }}
+                              className="text-base md:text-lg"
+                            >
                               {ingredient}
-                            </li>
+                            </motion.li>
                           ))}
                         </ul>
-                      </div>
+                      </motion.div>
 
-                      <div>
-                        <h3 className="font-semibold text-[#F0AD12] text-xl mb-2">
-                          Method:
-                        </h3>
-                        <p className="text-gray-700 text-base md:text-lg">
-                          {drink.method}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                      >
+                        <p className="font-semibold text-[#F0AD12] text-xl mb-2">
+                          Method
                         </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                        <p className="text-gray-700 text-base md:text-lg">
+                          {drinks[currentIndex].method}
+                        </p>
+                      </motion.div>
+                  </motion.div>
+                </motion.div>
               </div>
-            ))}
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Next Button */}
         <button 
-          onClick={() => handleSlide('next')} 
+          onClick={() => handleSlide(1)} 
           className="absolute right-0 lg:top-1/2 top-[20%] lg:-translate-y-1/2 z-10 p-2 bg-[#F0AD12] rounded-full hover:bg-[#d89a10] transition-colors"
           aria-label="Next slide"
-          disabled={isAnimating}
         >
-          <ChevronRight className="w-6 h-6" />
+          <ArrowRight className="w-6 h-6 text-[#095424] " strokeWidth={1.5} />
         </button>
       </div>
 
       {/* Slide Indicators */}
-      <div className="flex justify-center space-x-2 mt-8">
+      {/* <div className="flex justify-center space-x-2 mt-8">
         {drinks.map((_, index) => (
           <button
             key={index}
-            onClick={() => handleDotClick(index)}
+            onClick={() => {
+              setDirection(index > currentIndex ? 1 : -1);
+              setCurrentIndex(index);
+            }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentIndex === index + 1
+              currentIndex === index
                 ? 'bg-[#F0AD12] w-4' 
                 : 'bg-gray-300'
             }`}
             aria-label={`Go to slide ${index + 1}`}
-            disabled={isAnimating}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -11,15 +11,15 @@ export default function Footer() {
     <footer className="text-white bg-[#052B12] relative flex flex-col items-center overflow-hidden pb-10 ">
       <div className="w-full h-auto min-h-[500px] flex flex-col md:flex-row justify-between items-start md:items-start pt-10 md:pt-20 px-4 md:px-16">
         <div className="w-full md:w-[30%] space-y-6 md:space-y-10 text-left items-start ">
-          <img src="/images/logo.svg" className="" />
-          <p className="text-[18px] md:text-3xl lg:px-4 md:px-0">
+          <img src="/images/logo.svg" className="w-40" />
+          <p className="text-lg md:text-2xl lg:px-4 md:px-0 max-w-md">
             A Prestigious Journey into the World of Luxury Cocktails and Fine
             Spirits
           </p>
         </div>
         <div className="flex w-full md:w-[60%] lg:w-[40%]  gap-30 md:gap-30 items-start justify-between  flex-row-reverse lg:flex-col lg:items-center lg:justify-center  md:mt-0">
           <div className="flex flex-col gap-6 items-end">
-            <img src="/images/footerglass.svg" className=" md:w-auto" />
+            <img src="/images/footerglass.svg" className="w-40" />
             <ArrowUp
               className="ml-2 bg-[#F0AD12] rounded-full  lg:hidden text-[#095424]"
               onClick={() => {
@@ -28,6 +28,7 @@ export default function Footer() {
                   behavior: "smooth"
                 });
               }}
+              strokeWidth={1.5}
               size={30}
             />
           </div>
@@ -50,18 +51,20 @@ export default function Footer() {
                   behavior: "smooth"
                 });
               }}
+              strokeWidth={1.5}
             />
           </div>
         </div>
       </div>
       <img
         src="/images/sub4.svg"
-        className="absolute -left-[3rem] -bottom-[3rem] w-32 md:w-auto hidden md:block"
+        className="absolute -left-[3rem] -bottom-[3rem] w-36 md:w-auto hidden md:block"
       />
       <div>
         <p className="text-xs md:text-sm text-center mt-6 md:mt-0">
           {/* automatic html copy right and current year */}
-          &copy; {new Date().getFullYear()} Copyright NB Bar Academy. All Rights
+          <span className="text-sm md:text-base text-[#F0AD12]">&copy;</span>{" "}
+          {new Date().getFullYear()} Copyright NB Bar Academy. All Rights
           Reserved
         </p>
       </div>
