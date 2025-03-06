@@ -165,35 +165,37 @@ export default function Hero() {
 
                     <div className="flex items-center justify-between w-full">
                       <button
-                        className="px-4 sm:px-6 py-3 sm:py-4 bg-[#095424] text-white  transition rounded-full flex items-center gap-2 text-base sm:text-lg  group font-normal tracking-wide"
+                        className="px-3 sm:px-6 py-2.5 sm:py-4 bg-[#095424] text-white transition rounded-full flex items-center gap-1.5 sm:gap-2 text-xs sm:text-lg group font-normal tracking-wide max-w-[180px] sm:max-w-none"
                         onClick={() => router.push("/event")}
                       >
-                        {slides[currentIndex].buttonText}
+                        <span className="line-clamp-1">
+                          {slides[currentIndex].buttonText}
+                        </span>
                         <ArrowUpRight
-                          className="bg-[#F0AD12] rounded-full text-[#095424] p-1 group-hover:translate-x-1 transition-all duration-300"
-                          size={30}
+                          className="bg-[#F0AD12] rounded-full text-[#095424] p-1 group-hover:translate-x-1 transition-all duration-300 min-w-[20px] sm:w-8 sm:h-8"
+                          size={20}
                         />
                       </button>
 
                       {/* Navigator */}
-                      <div className="flex gap-4 sm:gap-6">
+                      <div className="flex gap-2 sm:gap-6">
                         <button
                           onClick={goToPrev}
-                          className="w-12 h-12 flex items-center justify-center border-2 border-white text-white hover:bg-[#095424] hover:border-none rounded-full transition"
+                          className="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center border border-white text-white hover:bg-[#095424] hover:border-none rounded-full transition"
                           aria-label="Previous slide"
                         >
                           <ArrowLeftIcon
-                            className="w-6 h-6"
+                            className="w-4 h-4 sm:w-6 sm:h-6"
                             strokeWidth={1.5}
                           />
                         </button>
                         <button
                           onClick={goToNext}
-                          className="w-12 h-12 flex items-center justify-center border-2 border-white text-white hover:bg-[#095424] hover:border-none rounded-full transition"
+                          className="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center border border-white text-white hover:bg-[#095424] hover:border-none rounded-full transition"
                           aria-label="Next slide"
                         >
                           <ArrowRightIcon
-                            className="w-6 h-6"
+                            className="w-4 h-4 sm:w-6 sm:h-6"
                             strokeWidth={1.5}
                           />
                         </button>
