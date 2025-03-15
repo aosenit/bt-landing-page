@@ -9,7 +9,7 @@ const EventRegisterationForm = ({
   formData,
   handleChange,
   handleProceed,
-  handleSubmit
+  handleSubmit,
 }: {
   step: number;
   direction: number;
@@ -20,22 +20,21 @@ const EventRegisterationForm = ({
 }) => {
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? '100%' : '-100%',
-      opacity: 0
+      x: direction > 0 ? "100%" : "-100%",
+      opacity: 0,
     }),
     center: {
       x: 0,
-      opacity: 1
+      opacity: 1,
     },
     exit: (direction: number) => ({
-      x: direction < 0 ? '100%' : '-100%',
-      opacity: 0
-    })
+      x: direction < 0 ? "100%" : "-100%",
+      opacity: 0,
+    }),
   };
 
   return (
     <div className="w-full">
-      
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={step}
@@ -46,7 +45,7 @@ const EventRegisterationForm = ({
           exit="exit"
           transition={{
             duration: 0.5,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           {step === 1 ? (
@@ -128,18 +127,14 @@ const EventRegisterationForm = ({
                 </label>
                 <div className="relative">
                   <input
-                    type="text"
+                    type="date"
                     id="dateOfBirth"
                     name="dateOfBirth"
                     placeholder="Select your DOB"
                     value={formData.dateOfBirth}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-700"
-                    onClick={(e) => ((e.target as HTMLInputElement).type = "date")}
                   />
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <ArrowRight className="h-5 w-5 text-gray-400" />
-                  </div>
                 </div>
               </div>
 
@@ -231,15 +226,13 @@ const EventRegisterationForm = ({
                 </div>
               </div>
 
-              <button className=" w-full bg-[#2B5F3A] hover:bg-[#224a2e] text-white py-4 rounded-full text-lg font-medium transition-all duration-300 flex items-center justify-center">
-                  <span className="text-sm sm:text-base">
-                    Register
-                  </span>
-                  <ArrowUpRight
-                    className="ml-2 bg-[#F0AD12] rounded-full text-[#095424]"
-                    size={16}
-                  />
-                </button>
+              <button className=" w-full bg-[#2B5F3A] hover:bg-[#224a2e] text-white py-4 rounded-full text-lg font-medium transition-all duration-300 flex gap-2 items-center justify-center">
+                <span className="text-sm sm:text-base">Register</span>
+                <ArrowUpRight
+                  className="bg-[#F0AD12] rounded-full text-[#095424] p-1 group-hover:translate-x-1 transition-all duration-300 min-w-[20px] sm:w-8 sm:h-8"
+                  size={20}
+                />
+              </button>
             </form>
           )}
         </motion.div>

@@ -20,14 +20,14 @@ export default function EventRegistration() {
     organization: "",
     position: "",
     phoneNumber: "",
-    gender: ""
+    gender: "",
   });
 
   const [timeLeft, setTimeLeft] = useState({
     days: 21,
     hours: 3,
     minutes: 59,
-    seconds: 48
+    seconds: 48,
   });
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function EventRegistration() {
             days: prev.days - 1,
             hours: 23,
             minutes: 59,
-            seconds: 59
+            seconds: 59,
           };
         }
         clearInterval(timer);
@@ -126,7 +126,7 @@ export default function EventRegistration() {
               { label: "Days", value: timeLeft.days },
               { label: "Hours", value: timeLeft.hours },
               { label: "Minutes", value: timeLeft.minutes },
-              { label: "Seconds", value: timeLeft.seconds }
+              { label: "Seconds", value: timeLeft.seconds },
             ].map((item, index) => (
               <motion.div
                 key={item.label}
@@ -147,7 +147,7 @@ export default function EventRegistration() {
                             item.label.toLowerCase() as keyof typeof timeLeft
                           ] === 0
                             ? 1
-                            : 0
+                            : 0,
                       }}
                     >
                       {item.value.toString().padStart(2, "0")}
@@ -176,6 +176,7 @@ export default function EventRegistration() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
+              {/* GO BACK ARROW */}
               <ArrowLeft
                 className="bg-[#F0AD12] rounded-full text-[#095424] p-1 w-8 h-8 cursor-pointer hover:bg-[#d89a10] transition-colors"
                 size={30}
